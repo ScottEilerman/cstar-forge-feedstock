@@ -15,7 +15,7 @@ source:
   sha256: b24a3c0d324b61e7e4def3b0ff7c48ca9412fbfb6e8ab63f156c962d59d4b740
 
 build:
-  number: 0
+  number: 1
   # note: we expect windows builds to fail due to a downstream dependency (xesmf)
   # not being available for windows. we still use noarch and accept the windows
   # build failures based on previous conda-forge admin guidance.
@@ -45,7 +45,14 @@ requirements:
     - xarray
     - nbformat
     - psutil
-    - cstar-ocean >=0.9
+    # typer backs the `cstar forge ...` CLI subcommand group (cstar_forge/cli.py);
+    # it currently only arrives transitively.
+    - typer
+    - kerchunk
+    - nest-asyncio
+    - ujson
+    - fastparquet
+    - cstar-ocean >=0.9.1
     - roms-tools >=4.0.0,<5
     # -- the `app` extra, bundled deliberately (batteries-included conda
     # package, matching the roms-tools metapackage philosophy): the blueprint
