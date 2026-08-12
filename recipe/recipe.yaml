@@ -3,7 +3,7 @@
 schema_version: 1
 
 context:
-  version: "0.3.0"
+  version: "0.4.0"
   python_min: "3.12"
 
 package:
@@ -12,10 +12,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/cstar-forge/cstar_forge-${{ version }}.tar.gz
-  sha256: b24a3c0d324b61e7e4def3b0ff7c48ca9412fbfb6e8ab63f156c962d59d4b740
+  sha256: 79cea9ed0dcd2fb73da6da409fcfec2ace4d4917bea6993a56dec9dbffc8225a
 
 build:
-  number: 1
+  number: 0
   # note: we expect windows builds to fail due to a downstream dependency (xesmf)
   # not being available for windows. we still use noarch and accept the windows
   # build failures based on previous conda-forge admin guidance.
