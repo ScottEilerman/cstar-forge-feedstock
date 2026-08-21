@@ -3,7 +3,7 @@
 schema_version: 1
 
 context:
-  version: "0.4.0"
+  version: "0.5.0"
   python_min: "3.12"
 
 package:
@@ -20,7 +20,18 @@ build:
   # not being available for windows. we still use noarch and accept the windows
   # build failures based on previous conda-forge admin guidance.
   noarch: python
-  script: python -m pip install . -vv --no-deps --no-build-isolation
+  script:
+    - python -m pip install . -vv --no-deps --no-build-isolation
+    # Ship activate.d/deactivate.d hooks (recipe/activate.sh has the full
+    # rationale) that set PYTHONNOUSERSITE=1 on env activation, keeping the
+    # env off Python's user-site (~/.local) — which otherwise precedes the
+    # env's site-packages on sys.path and silently shadows it, a chronic
+    # breakage on HPC systems where a module Python shares ~/.local.
+    # .sh only: this is a noarch package, but the hooks target HPC/Linux/macOS;
+    # on Windows they are simply inert.
+    - mkdir -p "$PREFIX/etc/conda/activate.d" "$PREFIX/etc/conda/deactivate.d"
+    - cp "$RECIPE_DIR/activate.sh" "$PREFIX/etc/conda/activate.d/cstar-forge_pythonnousersite.sh"
+    - cp "$RECIPE_DIR/deactivate.sh" "$PREFIX/etc/conda/deactivate.d/cstar-forge_pythonnousersite.sh"
 
 requirements:
   host:
@@ -52,8 +63,8 @@ requirements:
     - nest-asyncio
     - ujson
     - fastparquet
-    - cstar-ocean >=0.9.1
-    - roms-tools >=4.0.0,<5
+    - cstar-ocean >=0.11.0
+    - roms-tools >=4.1.1,<5
     # -- the `app` extra, bundled deliberately (batteries-included conda
     # package, matching the roms-tools metapackage philosophy): the blueprint
     # wizard runs under voila/jupyter out of the box --
