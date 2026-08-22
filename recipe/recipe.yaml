@@ -12,7 +12,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/cstar-forge/cstar_forge-${{ version }}.tar.gz
-  sha256: 79cea9ed0dcd2fb73da6da409fcfec2ace4d4917bea6993a56dec9dbffc8225a
+  sha256: 99b6caab159d22f3a065c3b784343b97ce3350065c55b1818d157853b1667a14
 
 build:
   number: 0
