@@ -3,7 +3,7 @@
 schema_version: 1
 
 context:
-  version: "0.7.0"
+  version: "0.7.1"
   python_min: "3.12"
 
 package:
@@ -12,7 +12,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/c/cstar-forge/cstar_forge-${{ version }}.tar.gz
-  sha256: 4ed405f6be05172f98b2f901f5b6e10488cc1639f236f9c68b27010ace5bb142
+  sha256: 6d67e5fe89e5be8a9396779d1f925d3e828db1504b7b0b8cd41af4fe499b70fe
 
 build:
   number: 0
@@ -63,7 +63,7 @@ requirements:
     - nest-asyncio
     - ujson
     - fastparquet
-    - cstar-ocean >=0.13.0
+    - cstar-ocean >=0.13.3
     - roms-tools >=4.1.1,<5
     # -- the `app` extra, bundled deliberately (batteries-included conda
     # package, matching the roms-tools metapackage philosophy): the blueprint
